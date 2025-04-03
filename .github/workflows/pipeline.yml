@@ -4,6 +4,20 @@ on:
   workflow_call:
 
 jobs:
+  dco-check:
+    name: DCO Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: DCO Check with dcoapp
+        uses: dcoapp/app@v1.1.0
+        env:
+          token: ${{ secrets.GH_PAT }}
+
   docker-tag:
     name: Check if 'latest' tag could be used (no build docker images)
     runs-on: ubuntu-latest
