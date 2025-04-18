@@ -1,0 +1,23 @@
+name: Test env name
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "AIMET version to release"
+        required: true
+        type: string
+env:
+  RELEASE_BRANCH: "release-aimet-${{ inputs.version }}"
+
+jobs:
+  checklist:
+    name: Validate version and release branch exists
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test name
+        run: |
+          echo $RELEASE_BRANCH
+      
+
+  
