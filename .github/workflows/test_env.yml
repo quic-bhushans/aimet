@@ -19,7 +19,8 @@ jobs:
         run: |
           echo Specified release version $RELEASE_BRANCH
           version_increments=`echo ${{ inputs.version }} | grep -o '\.' | wc -l`
-          if [[ version_increments != 2 ]]; then
+          echo $version_increments
+          if [[ $version_increments != 2 ]]; then
               echo "Incorrect version specified. Version must follow Semantic versioning i.e. <major>.<minor>.<patch>"
               echo "Refer to https://semver.org/"
               exit 1
