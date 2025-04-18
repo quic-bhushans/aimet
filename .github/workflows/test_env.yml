@@ -8,7 +8,7 @@ on:
         required: true
         type: string
 env:
-  RELEASE_BRANCH: "release-aimet-"
+  RELEASE_BRANCH: "release-aimet"
   INTERNAL_REPO_DIR: "aimet-repo"
 
 jobs:
@@ -29,7 +29,8 @@ jobs:
       - name: Set release branch env
         run: |
            branch_suffix=`echo "2.3.0" | cut -d'.' -f 1,2`
-           RELEASE_BRANCH="${{ env.RELEASE_BRANCH }}-$branch_suffx"
+           echo $branch_suffix
+           RELEASE_BRANCH="${{ env.RELEASE_BRANCH }}-${branch_suffx}"
            echo $RELEASE_BRANCH
            echo "RELEASE_BRANCH=${RELEASE_BRANCH}" >> $GITHUB_ENV
       - name: Checkout internal repo
