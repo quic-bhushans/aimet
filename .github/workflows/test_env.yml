@@ -36,7 +36,7 @@ jobs:
       - name: Checkout internal repo
         uses: actions/checkout@v4
         with:
-          ref: ${{ env.RELEASE_BRANCH }}
+          ref: develop # ${{ env.RELEASE_BRANCH }}
           path: ${{ env.INTERNAL_REPO_DIR }}
           fetch-depth: 0
       - name:
