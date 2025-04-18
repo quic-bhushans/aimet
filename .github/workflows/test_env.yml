@@ -44,7 +44,7 @@ jobs:
           echo Specified release version $RELEASE_BRANCH
           repo_version=`cat ${{ env.INTERNAL_REPO_DIR }}/packaging/version.txt`
           echo $repo_version
-          if [[ ${{ inputs.version }} != $repo_version]; then
+          if [[ ${{ inputs.version }} != $repo_version ]]; then
             echo "Specified release version does not match from $RELEASE_BRANCH branch's version"
             exit 1
           fi
