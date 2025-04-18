@@ -30,7 +30,7 @@ jobs:
         run: |
            branch_suffix=`echo "2.3.0" | cut -d'.' -f 1,2`
            echo $branch_suffix
-           RELEASE_BRANCH="${{ env.RELEASE_BRANCH }}-${branch_suffx}"
+           RELEASE_BRANCH="${{ env.RELEASE_BRANCH }}-${branch_suffix}"
            echo $RELEASE_BRANCH
            echo "RELEASE_BRANCH=${RELEASE_BRANCH}" >> $GITHUB_ENV
       - name: Checkout internal repo
@@ -42,7 +42,11 @@ jobs:
       - name:
         run: |
           echo Specified release version $RELEASE_BRANCH
-          cat packaging/version.txt
+          repo_version=`cat packaging/version.txt`
+          if [[ ${{ inputs.version }} != $repo_version]; then
+            echo "Specified release version does not match from $RELEASE_BRANCH branch's version"
+            exit 1
+          fi
           
       
 
