@@ -17,7 +17,14 @@ jobs:
     steps:
       - name: Test name
         run: |
-          echo $RELEASE_BRANCH
+          echo Specified release version $RELEASE_BRANCH
+          version_increments=`echo ${{ inputs.version }} | grep -o '\.' | wc -l`
+          if [[ version_increments != 2 ]];
+              echo "Incorrect version specified. Version must follow Semantic versioning i.e. <major>.<minor>.<patch>"
+              echo "Refer to https://semver.org/"
+              exit 1
+          fi
+          
       
 
   
