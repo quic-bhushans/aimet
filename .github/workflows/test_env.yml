@@ -8,7 +8,8 @@ on:
         required: true
         type: string
 env:
-  RELEASE_BRANCH: "release-aimet-${{ inputs.version }}"
+  RELEASE_BRANCH: "release-aimet-"
+  INTERNAL_REPO_DIR: "aimet-repo"
 
 jobs:
   checklist:
@@ -25,6 +26,22 @@ jobs:
               echo "Refer to https://semver.org/"
               exit 1
           fi
+      - name: Set release branch env
+        run: |
+           branch_suffix=`echo "2.3.0" | cut -d'.' -f 1,2`
+           RELEASE_BRANCH="${{ env.RELEASE_BRANCH }}-$branch_suffx"
+           echo $RELEASE_BRANCH
+           echo "RELEASE_BRANCH=${RELEASE_BRANCH}" >> $GITHUB_ENV
+      - name: Checkout internal repo
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_BRANCH }}
+          path: ${{ env.INTERNAL_REPO_DIR }}
+          fetch-depth: 0
+      - name:
+        run: |
+          echo Specified release version $RELEASE_BRANCH
+          cat packaging/version.txt
           
       
 
