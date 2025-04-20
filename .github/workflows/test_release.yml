@@ -12,9 +12,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           tag: ${{ github.ref_name }}
-        run: |
-          echo $GITHUB_REPOSITORY
-          gh release create "$tag" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-              --generate-notes
+        # run: |
+        #   echo $GITHUB_REPOSITORY
+        #   gh release create "$tag" \
+        #       --repo="$GITHUB_REPOSITORY" \
+        #       --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
+        #       --generate-notes
+        uses: softprops/action-gh-release@v1
+        with:
+          # body_path: ${{ github.workspace }}-CHANGELOG.txt
+          name: "Version ${{ env.tag }}"
+          repository: "quic-bhushans/aimet" # ${{ env.PUBLIC_REPO }}
+          tag_name: "${tag}"
+          target_commitish: "${github.ref_name}" # ${{ env.RELEASE_BRANCH }}
+          # note you'll typically need to create a personal access token
+          # with permissions to create releases in the other repo
+          token: "${GITHUB_TOKEN}"
+          generate_release_notes: true
+              
