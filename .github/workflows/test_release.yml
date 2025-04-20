@@ -23,8 +23,8 @@ jobs:
           # body_path: ${{ github.workspace }}-CHANGELOG.txt
           name: "Version ${{ env.tag }}"
           repository: "quic-bhushans/aimet" # ${{ env.PUBLIC_REPO }}
-          tag_name: "${tag}"
-          target_commitish: "${github.ref_name}" # ${{ env.RELEASE_BRANCH }}
+          tag_name: "${{ env.tag }}"
+          target_commitish: "${{ github.ref_name }}" # ${{ env.RELEASE_BRANCH }}
           # note you'll typically need to create a personal access token
           # with permissions to create releases in the other repo
           token: "${GITHUB_TOKEN}"
