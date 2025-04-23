@@ -18,11 +18,33 @@ on:
         default: "develop"
         type: string
 
+env:
+  DEFAULT_SRC_BRANCH: develop
+  DEFAULT_DST_BRABCH: develop
+
 jobs:
+
+  set_variables:
+    if: github.server_url != 'https://github.com'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Set environment variables"
+        run: |
+          echo "EVENT NAME: " ${{ github.event_name }}
+          if [[ ${{ github.event_name }} == "push" ]]; then
+            echo "In push event"
+            echo "SRC_BRANCH=${{ env.DEFAULT_SRC_BRANCH }}" >> $GITHUB_ENV
+            echo "DST_BRANCH=${{ env.DEFAULT_DST_BRANCH }}" >> $GITHUB_ENV
+          else
+            echo "In non push event"
+            echo "SRC_BRANCH=${{ inputs.src_branch }}" >> $GITHUB_ENV
+            echo "DST_BRANCH=${{ inputs.dst_branch }}" >> $GITHUB_ENV
+          fi
   check_vars:
     runs-on: ubuntu-latest
     steps:
       - name: "Get inputs"
         run: |
-          echo "inputs: src_branch:" ${{ inputs.src_branch }}
-          echo "inputs: dst_branch:" ${{ inputs.dst_branch }}
+          echo "EVENT NAME: " ${{ github.event_name }}
+          echo "inputs: src_branch:" ${{ env.SRC_BRANCH }}
+          echo "inputs: dst_branch:" ${{ env.DST_BRANCH }}
