@@ -1,0 +1,23 @@
+name: Workflow call
+
+on:
+
+  workflow_dispatch:
+    inputs:
+      src_branch:
+        description: "Internal source branch to sync"
+        required: false
+        default: "develop"
+        type: string
+      dst_branch:
+        description: "External destination branch to sync"
+        required: false
+        default: "develop"
+        type: string
+
+jobs:
+  call_vars:
+    uses: ./.github/workflows/workflow_call.yml
+    with:
+      src_branch: ${{ inputs.src_branch }}
+      dst_branch: ${{ inputs.dst_branch }}
