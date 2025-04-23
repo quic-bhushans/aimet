@@ -41,4 +41,4 @@ jobs:
       - name: "Get inputs"
         run: |
           echo "EVENT NAME: " ${{ github.event_name }}
-          echo "inputs: src_branch:" ${SRC_BRANCH} ${{ SRC_BRANCH }} $SRC_BRANCH
+          echo "inputs: src_branch:" $SRC_BRANCH
