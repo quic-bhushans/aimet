@@ -36,8 +36,8 @@ jobs:
             echo "DST_BRANCH=${{ env.DEFAULT_DST_BRANCH }}" >> $GITHUB_ENV
           else
             echo "In non push event"
-            env.SRC_BRANCH= ${{ env.src_branch }}
-            env.DST_BRANCH= ${{ env.dst_branch }}
+            env.SRC_BRANCH= ${{ inputs.src_branch }}
+            env.DST_BRANCH= ${{ inputs.dst_branch }}
           fi
           echo "DIFF='VAR'" >> $GITHUB_ENV
           echo "EVENT NAME: " ${{ github.event_name }}
