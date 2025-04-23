@@ -40,8 +40,9 @@ jobs:
             echo "DST_BRANCH=${{ inputs.dst_branch }}" >> $GITHUB_ENV
           fi
           echo "EVENT NAME: " ${{ github.event_name }}
-          echo "inputs: src_branch:" ${{ env.SRC_BRANCH }}
-          echo "inputs: dst_branch:" ${{ env.DST_BRANCH }}
+          echo "inputs: src_branch:" ${{ env.SRC_BRANCH }} ${SRC_BRANCH}
+          echo "inputs: dst_branch:" ${{ env.DST_BRANCH }} ${DST_BRANCH}
+          echo $GITHUB_ENV
   check_vars:
     runs-on: ubuntu-latest
     steps:
