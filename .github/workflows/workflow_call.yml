@@ -40,7 +40,7 @@ jobs:
             echo "DST_BRANCH=${{ inputs.dst_branch }}" >> $GITHUB_ENV
           fi
           echo "EVENT NAME: " ${{ github.event_name }}
-          echo "inputs: src_branch:" ${{ env.SRC_BRANCH }} ${SRC_BRANCH} $SRC_BRANCH
+          echo "inputs: src_branch: ${{ env.SRC_BRANCH }} ${SRC_BRANCH} $SRC_BRANCH"
           echo "inputs: dst_branch:" ${{ env.DST_BRANCH }} ${DST_BRANCH} $DST_BRANCH
           cat $GITHUB_ENV
   check_vars:
