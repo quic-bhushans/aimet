@@ -18,9 +18,6 @@ on:
         default: "develop"
         type: string
 
-env:
-  SRC_BRANCH: develop
-  DST_BRANCH: develop
 
 jobs:
 
@@ -36,8 +33,8 @@ jobs:
             echo "DST_BRANCH=${{ env.DEFAULT_DST_BRANCH }}" >> $GITHUB_ENV
           else
             echo "In non push event"
-            env.SRC_BRANCH= ${{ inputs.src_branch }}
-            env.DST_BRANCH= ${{ inputs.dst_branch }}
+            SRC_BRANCH= ${{ inputs.src_branch }}
+            DST_BRANCH= ${{ inputs.dst_branch }}
           fi
           echo "DIFF='VAR'" >> $GITHUB_ENV
           echo "EVENT NAME: " ${{ github.event_name }}
@@ -45,9 +42,6 @@ jobs:
           echo "inputs: dst_branch:" ${{ env.DST_BRANCH }} ${DST_BRANCH} $DST_BRANCH
           cat $GITHUB_ENV
           echo "diff var: $DIFF ${DIFF} ${{ env.DIFF }}"
-  check_vars:
-    runs-on: ubuntu-latest
-    steps:
       - name: "Get inputs"
         run: |
           echo "EVENT NAME: " ${{ github.event_name }}
