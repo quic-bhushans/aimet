@@ -1,0 +1,28 @@
+name: Test workflow call
+
+on:
+  push:
+    branches:
+      - develop
+
+  workflow_call:
+    inputs:
+      src_branch:
+        description: "Internal source branch to sync"
+        required: false
+        default: "develop"
+        type: string
+      dst_branch:
+        description: "External destination branch to sync"
+        required: false
+        default: "develop"
+        type: string
+
+jobs:
+  check_vars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Get inputs"
+        run: |
+          echo "inputs: src_branch:" ${{ inputs.src_branch }}
+          echo "inputs: dst_branch:" ${{ inputs.dst_branch }}
