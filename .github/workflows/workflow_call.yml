@@ -23,6 +23,7 @@ jobs:
 
   set_variables:
     runs-on: ubuntu-latest
+    environment: "custom-prod"
     steps:
       - name: "Set environment variables"
         run: |
