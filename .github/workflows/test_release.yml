@@ -4,7 +4,15 @@ on:
   workflow_dispatch:
 
 jobs:
+  verify-name:
+    name: Test1
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Try get data"
+        run: |
+          echo "test GH"
   release:
+    environment: "custom-prod"
     name: Release pushed tag
     runs-on: ubuntu-latest
     steps:
