@@ -58,4 +58,4 @@ jobs:
     steps:
       - name: "Read vars"
         run: |
-          echo "Var: ${{ needs.set_variables.output.branch2 }}"
+          echo "Var: ${{ needs.set_variables.outputs.branch2 }}"
