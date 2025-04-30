@@ -18,6 +18,8 @@ on:
         default: "develop"
         type: string
 
+env:
+  TEST: "value of var is TEST"
 
 jobs:
 
@@ -27,6 +29,7 @@ jobs:
     steps:
       - name: "Set environment variables"
         run: |
+          echo "Var: ${{ env.TEST }}"
           echo "branch name: ${{ github.ref_name }}"
           echo "EVENT NAME: " ${{ github.event_name }}
           if [[ ${{ github.event_name }} == "push" ]]; then
