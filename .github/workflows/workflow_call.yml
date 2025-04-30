@@ -25,9 +25,12 @@ jobs:
 
   set_variables:
     runs-on: ubuntu-latest
-    environment: "custom-prod"
+    outputs:
+      branch2: ${{ steps.step2.outputs.branch2 }}
+      # src_branch: ${{ steps.step2.env.SRC_BRANCH }}
     steps:
       - name: "Set environment variables"
+        id: step1
         run: |
           echo "Var: ${{ env.TEST }}"
           echo "branch name: ${{ github.ref_name }}"
@@ -44,6 +47,15 @@ jobs:
           fi
           echo src: $SRC_BRANCH
       - name: "Get inputs"
+        id: step2
         run: |
           echo "EVENT NAME: " ${{ github.event_name }}
           echo "inputs: src_branch:" $SRC_BRANCH
+          echo "branch2=hello" >> "$GITHUB_OUTPUT"
+  read_variables:
+    runs-on: ubuntu-latest
+    needs: set_variables
+    steps:
+      - name: "Read vars"
+        run: |
+          echo "Var: ${{ needs.set_variables.output.branch2 }}"
