@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       branch2: ${{ steps.step2.outputs.branch2 }}
-      # src_branch: ${{ steps.step2.env.SRC_BRANCH }}
+      src_branch: ${{ steps.step1.env.SRC_BRANCH }}
     steps:
       - name: "Set environment variables"
         id: step1
@@ -59,3 +59,4 @@ jobs:
       - name: "Read vars"
         run: |
           echo "Var: ${{ needs.set_variables.outputs.branch2 }}"
+          echo "Var: ${{ needs.set_variables.outputs.src_branch }}"
