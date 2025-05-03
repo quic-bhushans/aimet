@@ -26,11 +26,12 @@ jobs:
           echo "running on src_branch == develop"
   job2:
     needs: job1
+    if: always() && needs.build.result == 'success' || needs.build.result == 'skipped'
     runs-on: ubuntu-latest
     steps:
       - name: "run1"
         run: |
-          echo "running on job2
+          echo "running on job2"
     
   # call_vars:
   #   uses: ./.github/workflows/workflow_call.yml
