@@ -17,6 +17,13 @@ on:
 
 jobs:
 
+  job0:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "run1"
+        run: |
+          echo "running job0"
+
   job1:
     if: ${{ inputs.src_branch == 'develop' }}
     runs-on: ubuntu-latest
@@ -25,7 +32,7 @@ jobs:
         run: |
           echo "running on src_branch == develop"
   job2:
-    needs: job1
+    needs: [job0, job1]
     if: always() && (needs.job1.result == 'success' || needs.job1.result == 'skipped')
     runs-on: ubuntu-latest
     environment: prod
