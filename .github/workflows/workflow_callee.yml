@@ -18,6 +18,7 @@ on:
 jobs:
 
   job0:
+    if: ${{ inputs.dst_branch == 'develop' }}
     runs-on: ubuntu-latest
     steps:
       - name: "run1"
