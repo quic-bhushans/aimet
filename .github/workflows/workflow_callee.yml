@@ -28,6 +28,7 @@ jobs:
     needs: job1
     if: always() && (needs.job1.result == 'success' || needs.job1.result == 'skipped')
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - name: "run1"
         run: |
