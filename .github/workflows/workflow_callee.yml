@@ -32,7 +32,7 @@ jobs:
       - name: "run1"
         run: |
           echo "running on job2"
-          echo ${{ needs.build.result }}
+          echo ${{ needs.job1.result }}
     
   # call_vars:
   #   uses: ./.github/workflows/workflow_call.yml
