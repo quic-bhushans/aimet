@@ -35,7 +35,7 @@ jobs:
           echo "running on src_branch == develop"
   job-2:
     needs: [job-0, job-1]
-    if: ${{ needs.job-1.result == 'success' || needs.job-1.result == 'skipped' }}
+    if: ${{ always() && (needs.job-1.result == 'success' || needs.job-1.result == 'skipped') }}
     runs-on: ubuntu-latest
     environment: prod
     steps:
