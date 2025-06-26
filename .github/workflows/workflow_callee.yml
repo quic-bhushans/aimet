@@ -1,5 +1,11 @@
 name: Workflow call
 
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: true
+
+
 on:
 
   workflow_dispatch:
@@ -23,6 +29,7 @@ jobs:
     steps:
       - name: "run1"
         run: |
+          echo "REF: ${{ github.ref_name }}"
           echo "running job0"
           exit 1
 
